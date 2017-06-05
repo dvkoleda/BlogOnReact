@@ -1,7 +1,6 @@
 /**
  * Created by Koleda_D on 30.05.2017.
  */
-import weatherService from '../services/weather-service';
 
 //action types
 const ACTION_TYPE = 'ACTION_TYPE';
