@@ -4,7 +4,7 @@
 
 
 import { combineReducers } from 'redux';
-import someWidget from './widget';
+import someWidget from './post-index';
 
 /**
  *  This is the application state combined from all 'ducks' components.

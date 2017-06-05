@@ -1,9 +1,13 @@
 /**
  * Created by Koleda_D on 30.05.2017.
  */
+import axious from 'axios';
+
+const ROOT_URL = 'http://reduxblog.herokuapp.com/api';
+const API_KEY = '?key=hellofrombelarusnicecource';
 
 //action types
-const ACTION_TYPE = 'ACTION_TYPE';
+const FETCH_POST = 'FETCH_POST';
 
 //reduce function
 export default function reduce(state = [], action) {
@@ -12,13 +16,15 @@ export default function reduce(state = [], action) {
 }
 
 //action creators
-export function someActionCreator() {
+export function fetchPosts() {
+    const request = axious.get(`${ROOT_URL}/posts${API_KEY}`);
+
     return {
         type: ACTION_TYPE,
-        payload: {}
+        payload: request
     };
 }
 
 const actionsMap = {
-    ACTION_TYPE : (state, action) => state
+    FETCH_POST : (state, action) => state
 };
