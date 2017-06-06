@@ -4,14 +4,14 @@
 
 
 import { combineReducers } from 'redux';
-import someWidget from './post-index';
+import postReducer from './post';
 
 /**
  *  This is the application state combined from all 'ducks' components.
  */
 
 const rootReducer = combineReducers({
-    appStateName: someWidget
+    posts: postReducer
 });
 
 export default rootReducer;
