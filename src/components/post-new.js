@@ -2,18 +2,34 @@
  * Created by dvkoleda on 07.06.17.
  */
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { createNewPost } from '../ducks/post';
+import { Field, reduxForm } from 'redux-form';
+// import { createNewPost } from '../ducks/post';
 
 class PostNew extends Component {
 
+    renderTitleField(field) {
+        return (
+          <div>
+              <input
+                  type="text"
+                  {...field.input}
+              />
+          </div>
+        );
+    }
+
     render() {
         return (
-            <div>
-                Posts new
-            </div>
+            <form>
+                <Field
+                    name="title"
+                    component={this.renderTitleField}
+                />
+            </form>
         );
     }
 }
 
-export default connect(null, { createNewPost })(PostNew);
+export default reduxForm({
+    form: 'PostNewForm'
+})(PostNew);

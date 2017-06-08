@@ -1,9 +1,8 @@
 /**
  * Created by Koleda_D on 30.05.2017.
  */
-
-
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 import postReducer from './post';
 
 /**
@@ -11,7 +10,8 @@ import postReducer from './post';
  */
 
 const rootReducer = combineReducers({
-    posts: postReducer
+    posts: postReducer,
+    form: formReducer
 });
 
 export default rootReducer;
