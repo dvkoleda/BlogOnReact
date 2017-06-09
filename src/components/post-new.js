@@ -7,13 +7,16 @@ import { Field, reduxForm } from 'redux-form';
 
 class PostNew extends Component {
 
-    renderTitleField(field) {
+    renderInputField(field) {
         return (
-          <div>
+          <div className="from-group">
+              <label>{field.label}</label>
               <input
                   type="text"
-                  {...field.input}
+                  className="form-control"
+                  {...field.input} //assign auto created props to the input
               />
+              {field.meta.error}
           </div>
         );
     }
@@ -22,14 +25,45 @@ class PostNew extends Component {
         return (
             <form>
                 <Field
+                    label="Title"
                     name="title"
-                    component={this.renderTitleField}
+                    component={this.renderInputField}
+                />
+                <Field
+                    label="Categories"
+                    name="categories"
+                    component={this.renderInputField}
+                />
+                <Field
+                    label="Post Content"
+                    name="content"
+                    component={this.renderInputField}
                 />
             </form>
         );
     }
 }
 
+function validate(values) {
+    const errors = {};
+
+    if( !values.title ) {
+        errors.title = "Please, provide a title!";
+    }
+
+    if( !values.categories ) {
+        errors.title = "Please, provide categories!";
+    }
+
+    if( !values.content ) {
+        errors.title = "Please, provide a content!";
+    }
+
+    //if errors has any props, redux-form assumes form is invalid
+    return errors
+}
+
 export default reduxForm({
+    validate,
     form: 'PostNewForm'
 })(PostNew);
