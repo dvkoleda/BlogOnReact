@@ -5,25 +5,37 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 // import { createNewPost } from '../ducks/post';
 
-class PostNew extends Component {
+class PostNew extends Component {;
 
     renderInputField(field) {
+        const { touched, error } = field.meta;
+        const className =`from-group ${touched && error ?
+            'has-danger' : ''}`;
+
         return (
-          <div className="from-group">
+          <div className={className}>
               <label>{field.label}</label>
               <input
                   type="text"
                   className="form-control"
                   {...field.input} //assign auto created props to the input
               />
-              {field.meta.error}
+              <div className="text-help ">
+                  {touched ? error : ''}
+              </div>
           </div>
         );
     }
 
+    onSubmit(value) {
+
+    }
+
     render() {
+        const { handleSubmit } = this.props;
+
         return (
-            <form>
+            <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <Field
                     label="Title"
                     name="title"
@@ -39,6 +51,7 @@ class PostNew extends Component {
                     name="content"
                     component={this.renderInputField}
                 />
+                <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         );
     }
@@ -52,11 +65,11 @@ function validate(values) {
     }
 
     if( !values.categories ) {
-        errors.title = "Please, provide categories!";
+        errors.categories = "Please, provide categories!";
     }
 
     if( !values.content ) {
-        errors.title = "Please, provide a content!";
+        errors.content = "Please, provide a content!";
     }
 
     //if errors has any props, redux-form assumes form is invalid
