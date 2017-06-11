@@ -3,7 +3,9 @@
  */
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-// import { createNewPost } from '../ducks/post';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createPost } from '../ducks/post';
 
 class PostNew extends Component {;
 
@@ -27,8 +29,10 @@ class PostNew extends Component {;
         );
     }
 
-    onSubmit(value) {
-
+    onSubmit(values) {
+        this.props.createPost(values, () => {
+            this.props.history.push("/")
+        });
     }
 
     render() {
@@ -52,6 +56,9 @@ class PostNew extends Component {;
                     component={this.renderInputField}
                 />
                 <button type="submit" className="btn btn-primary">Submit</button>
+                <Link className="btn btn-danger" to="/">
+                    Cancel
+                </Link>
             </form>
         );
     }
@@ -79,4 +86,4 @@ function validate(values) {
 export default reduxForm({
     validate,
     form: 'PostNewForm'
-})(PostNew);
+})( connect(null, { createPost })(PostNew) );
