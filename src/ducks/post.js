@@ -11,6 +11,7 @@ const API_KEY = '?key=hellofrombelarusnicecource';
 const FETCH_POSTS = 'FETCH_POSTS';
 const CREATE_POST = 'CREATE_POST';
 const FETCH_POST = 'FETCH_POST';
+const DELETE_POST = 'DELETE_POST';
 
 //reduce function
 export default function reduce(state = {}, action) {
@@ -44,10 +45,26 @@ export function fetchPost(id) {
     };
 }
 
+export function deletePost(id, cb) {
+    axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`)
+        .then( () => cb() );
+    return {
+        type: DELETE_POST,
+        payload: id
+    };
+}
+
+
 const actionsMap = {
     FETCH_POSTS : (state, action) => _.keyBy(action.payload.data, 'id'),
+
     FETCH_POST : (state, action) => {
         const post = action.payload.data;
         return { ...state, [post.id] : post};
-    }
+    },
+
+/*    DELETE_POST : (state, action) => {
+        const { id } = action.payload;
+        return { ...state, [post.id] : post};
+    }*/
 };
