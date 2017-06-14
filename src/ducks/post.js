@@ -63,8 +63,8 @@ const actionsMap = {
         return { ...state, [post.id] : post};
     },
 
-/*    DELETE_POST : (state, action) => {
-        const { id } = action.payload;
-        return { ...state, [post.id] : post};
-    }*/
+    DELETE_POST : (state, action) => {
+        const postId = action.payload;
+        return _.omit(state, postId ); //returns new object without property which name is equal to value of the id.
+    }
 };

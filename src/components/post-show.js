@@ -5,17 +5,17 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchPost } from '../ducks/post';
+import { deletePost } from '../ducks/post';
 
 class PostShow extends Component {
 
     constructor(props){
-        super();
-
-        this.onDeleteClick.bind(this);
+        super(props);
+        this.onDeleteClick = this.onDeleteClick.bind(this);
     }
 
     componentDidMount() {
-        if ( this.props.post ) {
+        if ( !this.props.post ) {
             return
         }
         const { id } = this.props.match.params;
@@ -57,4 +57,4 @@ function mapStateToProps( { posts } , ownProps ) {
     return { post : posts[ownProps.match.params.id] };
 }
 
-export default connect(mapStateToProps, { fetchPost })(PostShow);
+export default connect(mapStateToProps, { fetchPost, deletePost })(PostShow);

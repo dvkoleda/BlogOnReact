@@ -5,7 +5,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchPosts } from '../ducks/post';
-import { deletePost } from '../ducks/post';
 import _ from 'lodash';
 
 class PostIndex extends Component {
@@ -44,4 +43,4 @@ function mapStateToProps(state) {
     return { posts: state.posts };
 }
 
-export default connect(mapStateToProps, { fetchPosts, deletePost })(PostIndex);
+export default connect(mapStateToProps, { fetchPosts})(PostIndex);
